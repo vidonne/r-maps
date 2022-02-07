@@ -22,6 +22,7 @@ Teach myself some mapping with R
 - [terra](https://github.com/rspatial/terra)
 - [spdata](https://github.com/Nowosad/spData)
 - [countrycode](https://github.com/vincentarelbundock/countrycode)
+- [mapsf](https://github.com/riatelab/mapsf/)
 - [layer](https://github.com/marcosci/layer)
 - [esri2sf](https://github.com/yonghah/esri2sf)
 - [leaflet](https://github.com/rstudio/leaflet)
