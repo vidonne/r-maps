@@ -10,7 +10,10 @@ uk_cities <- world.cities %>%
 
 uk_local_authorities <- read_sf("data/uk_local_authorities")
 
+st_crs(uk_local_authorities)
 
+uk_cities <- uk_cities |> 
+  st_transform(crs = st_crs(uk_local_authorities))
 
 uk_local_authorities %>% 
   mutate(cities_in_local_authority = lengths(st_covers(uk_local_authorities, uk_cities))) %>% 

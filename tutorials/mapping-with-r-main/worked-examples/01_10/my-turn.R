@@ -5,7 +5,7 @@ library(tigris)
 library(tidycensus)
 
 states_2010 <- states(year = 2010,
-                      cb = TRUE)
+                      cb = TRUE) #cb to clip shp
 
 vars_census_2010 <- 
   load_variables(2010,

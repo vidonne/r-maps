@@ -17,14 +17,6 @@ countries_data <- tribble(
   "Holland", 20
 )
 
-countries_data <- tribble(
-  ~country_name, ~choropleth_variable,
-  "United Kingdom", 23,
-  "USA", 30,
-  "Peru", 26,
-  "South Africa", 31,
-  "Holland", 20
-)
 
 countries_sf %>% 
   left_join(countries_data,
