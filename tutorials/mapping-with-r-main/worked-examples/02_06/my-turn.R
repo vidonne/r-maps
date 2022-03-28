@@ -26,21 +26,39 @@ us_most_popular_streaming_sf <- us_contiguous %>%
 
 # ==== Initial Data Visualisation ====
 
-
+us_most_popular_streaming_sf |> 
+  ggplot() +
+  geom_sf(aes(fill = streaming_service))
 
 
 
 
 # ==== Ordering services in the legend ====
 
+order_most_popular_service <- most_popular_streaming_service |> 
+  count(streaming_service, sort = TRUE) |> 
+  pull(streaming_service)
 
+us_most_popular_streaming_sf |> 
+  filter(!is.na(streaming_service)) |> 
+  mutate(streaming_service = fct_relevel(streaming_service,
+                                         order_most_popular_service)) |> 
+  ggplot() +
+  geom_sf(aes(fill = streaming_service))
 
-
-
+# Nice function fct_explicit_na to name NA
+us_most_popular_streaming_sf |> 
+  filter(is.na(streaming_service))
 
 # ==== Alternative color palettes ====
 
-
+us_most_popular_streaming_sf |> 
+  filter(!is.na(streaming_service)) |> 
+  mutate(streaming_service = fct_relevel(streaming_service,
+                                         order_most_popular_service)) |> 
+  ggplot() +
+  geom_sf(aes(fill = streaming_service)) +
+  scale_fill_brewer(palette = "Dark2")
 
 
 
@@ -57,4 +75,17 @@ colors_services <- list(
   "Netflix" = "black"
 )
 
+# change order to follow fct levels
+colors_services <- colors_services[order_most_popular_service]
 
+us_most_popular_streaming_sf |> 
+  filter(!is.na(streaming_service)) |> 
+  mutate(streaming_service = fct_relevel(streaming_service,
+                                         order_most_popular_service)) |> 
+  ggplot() +
+  geom_sf(aes(fill = streaming_service),
+          color = "white") +
+  scale_fill_manual(values =  colors_services,
+                    name = "Streaming service\n(most to least popular)") +
+  theme_void()
+  

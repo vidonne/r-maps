@@ -16,6 +16,11 @@ us_contiguous <- us_states %>%
 texas_state <- us_contiguous %>% 
   filter(name == "Texas")
 
-
+ggplot() +
+  geom_sf(data = us_contiguous,
+          color = "white") +
+  geom_sf(data = texas_state,
+          fill = "cornflowerblue") +
+  theme_void()
 
 

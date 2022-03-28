@@ -4,10 +4,22 @@ library(sf)
 library(rnaturalearthdata)
 library(ggrepel)
 
-germany_sf <- countries50 %>% 
+switzerland_sf <- countries50 %>% 
   st_as_sf() %>% 
-  filter(name == "Germany")
+  filter(name == "Switzerland")
 
-world.cities %>% 
-  filter(country.etc == "Germany") %>% 
+city_df <- world.cities %>% 
+  filter(country.etc == "Switzerland") %>% 
   slice_max(pop, n = 10)
+
+city_sf <- city_df |> 
+  st_as_sf(coords = c("long", "lat"), crs = 4326)
+
+ggplot() +
+  geom_sf(data = switzerland_sf) +
+  geom_sf(data = city_sf) +
+  geom_text_repel(data = city_df,
+                  aes(x = long, y = lat,
+                      label = name)) +
+  theme_void()
+  

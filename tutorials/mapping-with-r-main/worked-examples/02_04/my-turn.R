@@ -15,6 +15,15 @@ brazil_sf <- countries50 %>%
   st_as_sf() %>% 
   filter(name == "Brazil")
 
+brazil_cities_sf <- brazil_cities_sf |> 
+  arrange(desc(pop))
 
+ggplot() +
+  geom_sf(data = brazil_sf) +
+  geom_sf(data = brazil_cities_sf,
+          aes(size = pop,
+              fill = capital),
+          alpha = 0.7,
+          pch = 21)
 
 

@@ -22,13 +22,22 @@ us_contiguous <- us_contiguous %>%
 
 # ==== Your Data Viz ==== 
 
+order_of_regions <- us_contiguous |> 
+  count(region, sort = TRUE) |> 
+  pull(region)
+
 colors_of_regions <- list("Northeast" = "#c03728",
                           "Midwest" = "#919c4c",
                           "West" = "#fd8f24",
                           "South" = "#f5c04a")
 
+colors_of_region <- colors_of_regions[order_of_regions]
+
 us_contiguous %>% 
+  mutate(region = fct_relevel(region, order_of_regions)) |> 
   ggplot() +
-  geom_sf(aes(fill = region))
+  geom_sf(aes(fill = region)) +
+  scale_fill_manual(values = colors_of_regions) +
+  theme_void()
 
 

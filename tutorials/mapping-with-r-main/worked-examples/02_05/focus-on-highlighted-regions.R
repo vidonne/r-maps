@@ -23,3 +23,20 @@ texas_border_states <- us_contiguous[st_touches(texas_state, us_contiguous, spar
 texas_counties <- counties(state = "TX") %>% 
   ms_simplify()
 
+ggplot() +
+  geom_sf(data = texas_border_states,
+          color = "white") +
+  geom_sf_label(data = texas_border_states,
+                aes(label = name)) +
+  geom_sf(data = texas_counties,
+          aes(fill = if_else(NAMELSAD == "Travis County",
+                             "Capital",
+                             "Not capital")),
+          color = "white",
+          size = 0.2) +
+  scale_fill_manual(values = c("Capital" = "red",
+                               "Not capital" = "cornflowerblue"),
+                    name = "") +
+  geom_sf(data = texas_state,
+          fill = "transparent") +
+  theme_void()

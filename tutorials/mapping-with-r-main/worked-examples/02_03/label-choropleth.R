@@ -16,4 +16,5 @@ us_contiguous <- us_states %>%
 
 us_contiguous %>% 
   ggplot() +
-  geom_sf()
+  geom_sf() +
+  geom_sf_label(aes(label = name))
