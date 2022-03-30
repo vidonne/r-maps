@@ -35,3 +35,10 @@ order_of_education <- c("Didn't graduate high school", "High school graduate", "
 
 # ==== your data viz
 
+us_education_attainment_sf |> 
+  mutate(education_attainment = fct_relevel(education_attainment, order_of_education)) |> 
+  ggplot() +
+  geom_sf(aes(fill = estimate)) +
+  scale_fill_viridis_c() +
+  facet_wrap(~ education_attainment) +
+  theme_void()

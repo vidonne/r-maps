@@ -16,3 +16,9 @@ labels_landuse <- landuse_types %>%
 
 # ==== dataviz ====
 
+ggplot() +
+  layer_spatial(data = alaska_landuse,
+                aes(fill = stat(as.character(band1)))) +
+  scale_fill_manual(values = colors_landuse,
+                    labels = labels_landuse)
+

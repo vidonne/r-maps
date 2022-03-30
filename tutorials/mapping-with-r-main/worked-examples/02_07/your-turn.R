@@ -28,5 +28,9 @@ south_atlantic_prisons <- south_atlantic_states %>%
 
 # ==== Your turn =====
 
-
-
+south_atlantic_prisons |> 
+  ggplot() +
+  geom_sf(aes(fill = value, shape = "District of Columbia")) +
+  scale_fill_viridis_c(na.value = "pink") +
+  theme_void() +
+  guides(shape = guide_legend(override.aes = list(fill = "pink", order = 2), title = NULL), fill = guide_colorbar(order = 1))

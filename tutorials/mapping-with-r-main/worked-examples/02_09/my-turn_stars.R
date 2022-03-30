@@ -14,3 +14,7 @@ band_labels <- c(
 
 # ==== dataviz ====
 
+ggplot() +
+  geom_stars(data = satellite_imagery) +
+  facet_wrap(~ band,
+             labeller = as_labeller(band_labels))
