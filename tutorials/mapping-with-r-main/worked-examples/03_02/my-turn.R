@@ -17,5 +17,17 @@ germany_cities <- world.cities %>%
 
 # ==== dataviz ====
 
+leaflet() |> 
+  addProviderTiles(providers$OpenStreetMap) |> 
+  addPolygons(data = germany_sf) |> 
+  addCircleMarkers(data = germany_cities)
 
+leaflet() |> 
+  setMapWidgetStyle(style = list(background = "cornflowerblue")) |> 
+  addPolygons(data = germany_sf,
+              fillColor = "forestgreen") |> 
+  addCircleMarkers(data = germany_cities,
+                   label = ~name,
+                   popup = ~as.character(pop))
 
+# !!! need to transform column to character to have it show in the popup

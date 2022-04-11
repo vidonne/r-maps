@@ -37,7 +37,22 @@ popup_borough_summary <- function(borough, school_leavers){
 
 # ==== Dataviz ====
 
+pal_borough_school_leavers <- colorNumeric("viridis",
+                                           london_school_leavers_sf$value,
+                                           na.color = "pink")
 
+lf_london_school_leavers <- london_school_leavers_sf |> 
+  st_transform(crs = 4326) |> 
+  leaflet() |> 
+  addPolygons(weight = 1,
+              fillOpacity = 1,
+              fillColor = ~pal_borough_school_leavers(value),
+              popup = ~popup_borough_summary(lad11nm, value)) |> 
+  addLegend(pal = pal_borough_school_leavers,
+            values = ~value,
+            opacity = 1,
+            title = "School leavers",
+            na.label = "No data collected")
 
 
 # ==== NA position fix ====

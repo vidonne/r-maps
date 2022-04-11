@@ -16,7 +16,17 @@ labels_landuse <- landuse_types %>%
 
 # ==== dataviz ====
 
+pal_alaska <- colorFactor(as.character(colors_landuse),
+                          values(alaska_landuse))
 
+labels_landuse
+
+lf_alaska_map <- leaflet() |> 
+  addRasterImage(x = alaska_landuse,
+                 colors = pal_alaska) |> 
+  addLegend(pal = pal_alaska,
+            values = values(alaska_landuse),
+            labFormat = labelFormat(transform = function(x) labels_landuse[as.character(x)]))
 
 
 

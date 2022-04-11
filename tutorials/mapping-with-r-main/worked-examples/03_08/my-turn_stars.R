@@ -16,4 +16,16 @@ band_labels <- c(
 
 # ==== dataviz ====
 
+values_band_4 <- satellite_imagery |> 
+  filter(band == 4) |> 
+  pull()
 
+pal_band_4 <- colorNumeric("viridis",
+                           values_band_4)
+
+leaflet() |> 
+  addStarsImage(satellite_imagery,
+                band = 4,
+                colors = pal_band_4) |> 
+  addLegend(pal =  pal_band_4,
+            values = values_band_4)

@@ -36,7 +36,25 @@ city_label <- function(city, population){
 
 # ==== Data Viz ====
 
+brazil_cities_sf <- brazil_cities_sf |> 
+  arrange(desc(pop))
 
+scale_pop <- function(pop) {
+  sqrt(pop) * 1e-2
+}
+
+leaflet() |> 
+  addPolygons(data = brazil_sf,
+              fillColor = "darkolivegreen",
+              fillOpacity = 1,
+              weight = 1,
+              color = "black") |> 
+  addCircleMarkers(data = brazil_cities_sf,
+                   fillColor = "grey",
+                   fillOpacity = 1,
+                   weight = 1,
+                   popup = ~city_label(name, pop),
+                   radius = ~scale_pop(pop))
 
 
 

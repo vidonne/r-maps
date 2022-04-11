@@ -33,6 +33,25 @@ popup_airport <- function(airport, passengers){
 
 # ==== Data viz ====
 
+us_airport_passengers_2019 <- us_airport_passengers_2019 |> 
+  arrange(desc(total_passengers))
 
+size_passenger <- function(tot_passenger) {
+  sqrt(tot_passenger) * 2e-3
+}
+
+leaflet() |> 
+  addPolygons(data = us_contiguous_sf,
+              fillColor = "grey",
+              fillOpacity = 1,
+              color = "white",
+              weight = 1) |> 
+  addCircleMarkers(data = us_airport_passengers_2019,
+                   fillColor = "blue",
+                   color = "black",
+                   weight = 1,
+                   label = ~airport,
+                   popup = ~popup_airport(airport, total_passengers),
+                   radius = ~size_passenger(total_passengers))
 
 

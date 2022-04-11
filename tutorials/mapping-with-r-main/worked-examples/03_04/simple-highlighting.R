@@ -19,3 +19,18 @@ texas_state <- us_contiguous %>%
   filter(name == "Texas")
 
 # ==== Data viz ====
+
+leaflet() |> 
+  addPolygons(data = us_contiguous,
+              weight = 1,
+              fillColor = "lightgrey",
+              fillOpacity = 1,
+              label = ~name,
+              color = "white") |> 
+  addPolygons(data = texas_state,
+              weight = 1,
+              fillColor = "cornflowerblue",
+              fillOpacity = 1,
+              label = ~name,
+              color = "black") |> 
+  setMapWidgetStyle(style = list(background = "bisque"))

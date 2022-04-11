@@ -49,8 +49,21 @@ popup_state_summary <- function(state, n_prisoners){
 
 # ==== Your turn =====
 
+pal_prison_population <- colorNumeric("viridis", south_atlantic_prisons$state_prison_population, na.color = "pink")
 
 
+lf_south_atlantic_prisons <- south_atlantic_prisons %>% 
+  st_transform(crs = 4326) |> 
+  leaflet() %>% 
+  addPolygons(weight = 1,
+              color = "white",
+              fillColor = ~pal_prison_population(state_prison_population),
+              popup = ~popup_state_summary(name, state_prison_population),
+              fillOpacity = 1) %>% 
+  addLegend(pal = pal_prison_population,
+            values = ~state_prison_population,
+            na.label = "District of Columbia",
+            title = "Hello")
 
 # ==== NA position fix ====
 
